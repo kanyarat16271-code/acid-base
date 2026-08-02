@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>เจาะดาววิทยาศาสตร์ ม.ต้น - สิ่งมีชีวิต</title>
+    <title>เจาะดาววิทยาศาสตร์ - สารที่มีสมบัติเป็นกรด</title>
     <!-- MediaPipe Dependencies -->
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
@@ -47,8 +47,8 @@
     </div>
 
     <div id="start-screen" class="modal">
-        <h1 style="font-size: 42px; color: #FFD700; margin-bottom: 10px;">🌟 เกมเจาะดาววิทยาศาสตร์ (ม.ต้น)</h1>
-        <p style="font-size: 20px; margin-bottom: 15px;">ใช้นิ้วชี้แตะเฉพาะดาวที่เป็น <strong style="color: #4ADE80;">"สิ่งมีชีวิต"</strong></p>
+        <h1 style="font-size: 42px; color: #FFD700; margin-bottom: 10px;">🌟 เกมเจาะดาววิทยาศาสตร์ </h1>
+        <p style="font-size: 20px; margin-bottom: 15px;">ใช้นิ้วชี้แตะเฉพาะดาวที่เป็น <strong style="color: #4ADE80;">"สารที่มีสมบัติเป็นกรด"</strong></p>
         <div style="background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 15px; margin-bottom: 25px; text-align: left; font-size: 16px;">
             ⚠️ <strong>กติกาใหม่ (เน้นความแม่นยำ):</strong><br>
             • เจาะถูก: <strong>+10 คะแนน</strong> (Combo ทุก 3 ครั้ง Bonus +10)<br>
@@ -69,9 +69,9 @@
 
 <script>
 // ชุดคำศัพท์ ม.ต้น
-const LIVING_THINGS = ['ไฮดรา', 'พารามีเซียม', 'อะมีบา', 'แบคทีเรีย', 'ยีสต์', 'ฟองน้ำทะเล', 'กัลปังหา', 'กาฝาก', 'พยาธิใบไม้', 'ดาวทะเล'];
-const NON_LIVING_THINGS = ['ไวรัส', 'ไวรอยด์', 'DNA', 'เอนไซม์', 'เกล็ดสโนว์', 'เปลือกหอย', 'ก้อนเมฆ', 'หุ่นยนต์ AI', 'หินปูน', 'ไฟป่า'];
-
+const TARGET_THINGS = ['น้ำส้มสายชู', 'น้ำมะนาว', 'น้ำอัดลม', 'กรดเกลือ', 'น้ำมะขาม', 'กรดมด', 'วิตามินซี', 'น้ำยาล้างห้องน้ำ', 'นมเปรี้ยว', 'กรดซัลฟิวริก'];
+const NON_TARGET_THINGS = ['สบู่', 'ผงซักฟอก', 'น้ำขี้เถ้า', 'น้ำปูนใส', 'โซดาไฟ', 'น้ำยาถูพื้น', 'แชมพู', 'ยาสีฟัน', 'ยาลดกรด', 'แอมโมเนีย'];
+    
 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 function playSound(type) {
     if (audioCtx.state === 'suspended') audioCtx.resume();
@@ -119,10 +119,10 @@ resize();
 
 class Star {
     constructor() {
-        this.radius = 42; // ปรับขนาดให้เล็กลงเล็กน้อยเพื่อความแม่นยำ
+        this.radius = 50; // ปรับขนาดให้เล็กลงเล็กน้อยเพื่อความแม่นยำ
         this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
         this.y = canvas.height + this.radius;
-        this.speed = Math.random() * 2.5 + 3.5; // ปรับความเร็วเพิ่มขึ้นสำหรับ ม.ต้น
+        this.speed = Math.random() * 2 + 3; // ปรับความเร็วเพิ่มขึ้นสำหรับ ม.ต้น
         this.isLiving = Math.random() < 0.5;
         const pool = this.isLiving ? LIVING_THINGS : NON_LIVING_THINGS;
         this.text = pool[Math.floor(Math.random() * pool.length)];
@@ -317,13 +317,13 @@ function endGame() {
     document.getElementById('final-score').innerText = `คะแนนรวม: ${score}`;
     
     // เกณฑ์การประเมิน ม.ต้น
-    let badge = '🥉', rankText = 'ระดับ: พอใช้ (ต้องกลับไปทบทวนคำศัพท์ชีววิทยา!)';
+    let badge = '🥉', rankText = 'ระดับ: พอใช้ (ต้องกลับไปทบทวนความรู้แล้วล่ะ!)';
     if (score >= 150) { 
         badge = '🥇'; 
-        rankText = 'ระดับ: ยอดเยี่ยม! (เซียนชีววิทยาตัวจริง)'; 
+        rankText = 'ระดับ: ยอดเยี่ยม! (เซียนวิทยาศาสตร์ตัวจริง)'; 
     } else if (score >= 90) { 
         badge = '🥈'; 
-        rankText = 'ระดับ: ดีมาก! (แยกแยะสิ่งมีชีวิตได้ดี)'; 
+        rankText = 'ระดับ: ดีมาก! (พยายามอีกนิด ระดับเซียนรออยู่)'; 
     }
 
     document.getElementById('badge').innerText = badge;
