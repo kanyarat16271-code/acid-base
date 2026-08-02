@@ -122,7 +122,7 @@ class Star {
         this.radius = 50; // ปรับขนาดให้เล็กลงเล็กน้อยเพื่อความแม่นยำ
         this.x = Math.random() * (canvas.width - this.radius * 2) + this.radius;
         this.y = canvas.height + this.radius;
-        this.speed = Math.random() * 2.2 + 3.3; // ปรับความเร็วเพิ่มขึ้นสำหรับ ม.ต้น
+        this.speed = Math.random() * 2.5 + 3.5; // ปรับความเร็วเพิ่มขึ้นสำหรับ ม.ต้น
         this.isLiving = Math.random() < 0.5;
         const pool = this.isLiving ? LIVING_THINGS : NON_LIVING_THINGS;
         this.text = pool[Math.floor(Math.random() * pool.length)];
